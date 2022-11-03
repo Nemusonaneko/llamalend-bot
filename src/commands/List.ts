@@ -13,16 +13,14 @@ export const List: Command = {
         `SELECT ADDRESS FROM discord WHERE ID =?;`,
         [id]
       );
-      const converted = addresses[0] as any[];
-      if (converted.length > 0) {
-        let message = ``;
-        converted.map((address) => {
-          message += `${address.ADDRESS}\n`;
-        });
-        interaction.reply({ ephemeral: true, content: message });
-      } else {
-        interaction.reply({ ephemeral: true, content: "No addresses stored" });
+      let message = ``;
+      (addresses[0] as any[]).map((address) => {
+        message += `${address.ADDRESS}\n`;
+      });
+      if (message.length === 0) {
+        message = "No addresses"
       }
+      interaction.reply({ ephemeral: true, content: message });
     } catch (error: any) {
       interaction.reply({ ephemeral: true, content: `Error: ${error}` });
     }
