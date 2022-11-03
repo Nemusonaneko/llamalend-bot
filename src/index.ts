@@ -10,7 +10,6 @@ import express from "express";
 const client = new Client({ intents: [] });
 const token = process.env.DISCORD_BOT_TOKEN || "no token";
 const app = express();
-const port = process.env.PORT;
 
 client.on(
   "interactionCreate",
