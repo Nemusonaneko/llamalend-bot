@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "discord": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts"
   },
   "devDependencies": {
     "@types/cron": "^2.0.0",
