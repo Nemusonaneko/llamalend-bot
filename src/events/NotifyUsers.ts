@@ -1,5 +1,6 @@
 import { Client } from "discord.js";
 import { execute } from "../utils/sql";
+import fetch from "node-fetch";
 
 export const NotifyUsers = async (client: Client, lastHour: boolean) => {
   const now = Math.round(Date.now() / 1e3);
