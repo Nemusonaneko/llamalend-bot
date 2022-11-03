@@ -5,9 +5,12 @@ import { onInteraction } from "./events/onInteraction";
 import { CommandList } from "./commands/CommandList";
 import { CronJob } from "cron";
 import { NotifyUsers } from "./events/NotifyUsers";
+import express from "express";
 
 const client = new Client({ intents: [] });
 const token = process.env.DISCORD_BOT_TOKEN || "no token";
+const app = express();
+const port = process.env.PORT;
 
 client.on(
   "interactionCreate",
@@ -47,3 +50,6 @@ client.on("ready", async () => {
 });
 
 client.login(token);
+app.listen(process.env.PORT, () =>
+  console.log(`Server started on port ${process.env.PORT}!`)
+);
