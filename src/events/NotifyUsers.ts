@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 
 export const NotifyUsers = async (client: Client, lastHour: boolean) => {
   const now = Math.round(Date.now() / 1e3);
-  const start = lastHour ? now : now + 24 * 3600;
+  const start = now;
   const end = lastHour ? now + 3600 * 1.5 : now + 25 * 3600;
   const loans = await getLoansInDeadline(start, end);
 
