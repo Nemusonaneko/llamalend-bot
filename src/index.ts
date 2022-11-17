@@ -17,6 +17,7 @@ client.on(
 );
 
 client.on("ready", async () => {
+  console.log("Starting ready commands")
   if (!token) return;
   const rest = new REST({ version: "10" }).setToken(token);
   const commandData = CommandList.map((command) => command.data.toJSON());
