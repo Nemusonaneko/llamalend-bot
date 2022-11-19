@@ -35,12 +35,13 @@ export const NotifyUsers = async (client: Client, lastHour: boolean) => {
   );
 };
 
-async function getLoansInDeadline(start:number, end:number){
-  const loanData = await fetch("https://api.thegraph.com/subgraphs/name/0xngmi/llamalend", {
-        method: "POST",
-        body: JSON.stringify({
-            query:
-`query getloan($start: BigInt, $end: BigInt){
+async function getLoansInDeadline(start: number, end: number) {
+  const loanData = await fetch(
+    "https://api.thegraph.com/subgraphs/name/0xngmi/llamalend",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        query: `query getloan($start: BigInt, $end: BigInt){
 	loans(where: {
 		deadline_gte: $start,
 		deadline_lte: $end,
@@ -54,19 +55,24 @@ async function getLoansInDeadline(start:number, end:number){
 		}
 	}
 }`,
-            variables:{
-                start,
-                end,
-            }
-        })
-    }).then(r=>r.json())
-    return (loanData.data.loans as {
-      "id": string,
-      "owner": string,
-      "nftId": string,
-      "deadline": string,
-      "pool": {
-        "name": string
-      }
-    }[]).filter(loan=>loan.owner !== "0x0000000000000000000000000000000000000000")
+        variables: {
+          start,
+          end,
+        },
+      }),
+    }
+  ).then((r) => r.json());
+  return (
+    loanData.data.loans as {
+      id: string;
+      owner: string;
+      nftId: string;
+      deadline: string;
+      pool: {
+        name: string;
+      };
+    }[]
+  ).filter(
+    (loan) => loan.owner !== "0x0000000000000000000000000000000000000000"
+  );
 }
