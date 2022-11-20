@@ -24,7 +24,7 @@ export const Loans: Command = {
         message += `Loans for ${addresses[i]}:\n`;
         const loans = await getLoans(addresses[i]);
         if (loans.length === 0) {
-          message += "No loans";
+          message += "No loans\n";
         } else {
           for (let j = 0; j < loans.length; j++) {
             const loan = loans[i];
