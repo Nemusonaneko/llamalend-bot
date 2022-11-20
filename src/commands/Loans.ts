@@ -21,14 +21,19 @@ export const Loans: Command = {
       });
       let message = "";
       for (let i = 0; i < addresses.length; i++) {
+        message += `Loans for ${addresses[i]}`;
         const loans = await getLoans(addresses[i]);
-        for (let j = 0; j < loans.length; j++) {
-          const loan = loans[i];
-          message += `${loan.pool.name} loan for NFT ID ${
-            loan.nftId
-          } will expire in ${((Number(loan.deadline) - now) / 86400).toFixed(
-            2
-          )} days\n`;
+        if (loans.length === 0) {
+          message += "No loans";
+        } else {
+          for (let j = 0; j < loans.length; j++) {
+            const loan = loans[i];
+            message += `${loan.pool.name} loan for NFT ID ${
+              loan.nftId
+            } will expire in ${((Number(loan.deadline) - now) / 86400).toFixed(
+              2
+            )} days\n`;
+          }
         }
       }
       message += "Go to https://llamalend.com/repay to repay your loans.";
